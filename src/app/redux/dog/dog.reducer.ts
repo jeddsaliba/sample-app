@@ -11,11 +11,10 @@ const _dogReducer = createReducer(
         }
     }),
     on(changeDogStatusSuccess, (state, { payload }) => {
-        const dogs = state.dogs;
-        console.log("dogs", dogs);
+        let result = state.dogs.filter((dog: any) => dog.name !== payload.name);
         return {
             ...state,
-            dogs: [...state.dogs, payload]
+            dogs: [...result, payload]
         }
     })
 )
