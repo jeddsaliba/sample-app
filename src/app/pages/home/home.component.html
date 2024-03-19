@@ -1,0 +1,65 @@
+<div>
+    <p>Pet Manager 3000</p>
+    <div>
+        <form [formGroup]="form" (ngSubmit)="onHandleSubmit()">
+            <label for="dog-name">Dog Name</label>
+            <input type="text" formControlName="dog_name">
+            <button type="submit">Add Pet</button>
+        </form>
+    </div>
+</div>
+
+<div>
+    <div>
+        <table>
+            <tr>
+                <th>Listed</th>
+            </tr>
+            <ng-container *ngIf="(dogs$ | async) as dogs">
+                <ng-container *ngFor="let dog of dogs">
+                    <tr *ngIf="dog.status === 'listed'">
+                        <td>
+                            <label>{{ dog.name }}</label>
+                            <button (click)="onChangeToExamining(dog)">Next</button>
+                        </td>
+                    </tr>
+                </ng-container>
+            </ng-container>
+        </table>
+    </div>
+
+    <div>
+        <table>
+            <tr>
+                <th>Examining</th>
+            </tr>
+            <ng-container *ngIf="(dogs$ | async) as dogs">
+                <ng-container *ngFor="let dog of dogs">
+                    <tr *ngIf="dog.status === 'examining'">
+                        <td>
+                            <label>{{ dog.name }}</label>
+                            <button (click)="onChangeToHooman(dog)">Next</button>
+                        </td>
+                    </tr>
+                </ng-container>
+            </ng-container>
+        </table>
+    </div>
+
+    <div>
+        <table>
+            <tr>
+                <th>Finally Back To Hooman</th>
+            </tr>
+            <ng-container *ngIf="(dogs$ | async) as dogs">
+                <ng-container *ngFor="let dog of dogs">
+                    <tr *ngIf="dog.status === 'finally_back_to_hooman'">
+                        <td>
+                            <label>{{ dog.name }}</label>
+                        </td>
+                    </tr>
+                </ng-container>
+            </ng-container>
+        </table>
+    </div>
+</div>
